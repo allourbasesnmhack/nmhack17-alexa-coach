@@ -1,4 +1,4 @@
-welcome: Welcome, {{ first_name }} {{ last_name }} ... You have {{ openact }} open activities for today. 
+welcome: Welcome, {{ first_name }} {{ last_name }}...You have {{ openact }} open activities for today. 
 
 goals_good: Great job! You have 5 planned goals and you have {{ openact }}
 
