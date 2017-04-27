@@ -1,8 +1,10 @@
-
+<<<<<<< HEAD
+welcome: Welcome, {{ first_name }} {{ last_name }}...You have {{ openact }} open activities for today.
+=======
 welcome: Welcome, {{ first_name }} {{ last_name }}...You have {{ openact }} open activities for today... ...
 
 tips_question: ...Would you like any tips on meeting your goals?
-
+>>>>>>> e8450f13fc81f2bea04d669db9e925d06deab59d
 
 goals_good: Great job! You have 5 planned goals and you have {{ openact }}
 
@@ -16,9 +18,4 @@ goal_item_under: You have {{actual}} {{goalname}} activities scheduled for today
 
 goal_item_over: You have met your {{goalname}} goal of {{target}} for today with {{actual}} activities...
 
-activity_list: '{{ regarding }} is a type {{ segment }} client and has a {{ type }} for {{ subject }}'
-question_tip: would you like any tips on meeting your goals?
-
-question_activites: would you like to list your top five activites?
-
-question_oppertunites: would you like to list your top 5 oppertunites?
+tips: Here's a TIP

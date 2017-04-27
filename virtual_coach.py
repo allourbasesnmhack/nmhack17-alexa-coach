@@ -1,7 +1,8 @@
 import logging
 import boto3
 import goals
-import activites
+import tips
+import activities
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
@@ -29,69 +30,75 @@ count = 0
 for activity_item in activities_items:
     count = count + int(activity_item['count'])
 
-@ask.on_session_started
-def new_session():
-    log.info('new session started')
+# @ask.on_session_started
+# def new_session():
 
 @ask.launch
 def start_skill():
     #welcome_message = render_template('welcome', first_name=item['first_name'], last_name=item['last_name'], openact=item['openact'], factfind=item['factfind'], suspects=item['suspects'], meals=item['meals'])
     welcome_message = render_template('welcome', first_name=userinfo_item['first_name'], last_name=userinfo_item['last_name'], openact=count)
     welcome_message += goals.generateGoalsMessage(userinfo_item['userid'])
-     welcome_message += render_template('tips_question')
+    welcome_message += render_template('tips_question')
 
-    session.attributtes['intent']=1
+    session.attributes['intent']=1
 
     return question(welcome_message)
 
-@ask.intent("YesGoalsIntent")
+@ask.intent("YesIntent")
 def yes_intent():
     intent = session.attributes['intent']
-    if( intent == 1){ #tips
+    if( intent == 1): #tips
+        # message = tips.generateTipsMessage(userinfo_item['userid'])
+        message = tips.generateTipsMessage("Hello")
 
-        session.attributtes['intent']=2
-        message=render_template("question_tip")
-    }
-    elif(intent == 2){ #acitivite
+        session.attributes['intent']=2
+        message+=render_template("question_tip")
+
+    elif(intent == 2): #acitivite
         message+=activities.generateActivitiesMessage(userinfo_item['userid'])
-        session.attributtes['intent']=3
+        session.attributes['intent']=3
         message+=render_template("question_activites")
-    }
-    elif(intent == 3 ){ #opertunities
 
-        session.attributtes['intent']=4
+    elif(intent == 3 ): #opertunities
+
+        session.attributes['intent']=4
         message=render_template("question_oppertunites")
-    }
-    else{
+
+    else:
         message = render_template('good_bye')
-    }
+
 
     return question(message)
 
-@ask.intent("NoGoalsIntent")
+@ask.intent("NoIntent")
 def no_intent():
     intent = session.attributes['intent']
-    if( intent == 1){ #tips
+    if( intent == 1): #tips
 
-        session.attributtes['intent']=2
+        session.attributes['intent']=2
         message=render_template("question_tip")
-    }
-    elif(intent == 2){ #acitivite
 
-        session.attributtes['intent']=3
+    elif(intent == 2): #acitivite
+
+        session.attributes['intent']=3
         message=render_template("question_activites")
-    }
-    elif(intent == 3 ){ #opertunities
 
-        session.attributtes['intent']=4
+    elif(intent == 3 ): #opertunities
+
+        session.attributes['intent']=4
         message=render_template("question_oppertunites")
-    }
-    else{
+
+    else:
         message = render_template('good_bye')
-    }
 
     return question(message)
 
+# @ask.intent("YesIntent")
+# def yes_intent():
+#     print userinfo_item['userid']
+#     # tips_message = tips.generateTipsMessage(userinfo_item['userid'])
+#     tips_message = render_template('tips')
+#     return statement(tips_message)
 
 @ask.intent('AMAZON.CancelIntent')
 @ask.intent('AMAZON.StopIntent')
