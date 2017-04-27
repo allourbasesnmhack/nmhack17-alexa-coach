@@ -7,3 +7,5 @@ goals_bad: Your a little under your goals, you have 5 planned goals and you have
 good_bye: See you tomorrow.  Have a good day!
 
 tester: Its Alive
+
+goal_item: Here is your {{goalname}} goal. You have {{actual}} activities scheduled for today, that is {{difference}} over your goal of {{target}}.
