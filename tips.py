@@ -2,7 +2,7 @@ import boto3
 from flask import render_template
 from boto3.dynamodb.conditions import Key, Attr
 
-def generateTipsMessages( goal_name ):
+def generateTipsMessage( goal_name ):
     tips_message = "Here's a tip"
     # dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     # table = dynamodb.Table('tips')
