@@ -1,6 +1,7 @@
 import logging
 import boto3
 import goals
+import tips
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
@@ -45,6 +46,11 @@ def yes_intent():
 def no_intent():
     no_message = render_template('good_bye')
     return statement(no_message)
+
+@ask.intent("YesTipIntent")
+def yes_intent():
+    tips_message = tips.generateTipsMessage(userinfo_item['userid'])
+    return question(tips_message)
 
 if __name__ == '__main__':
     app.run(debug=True)
