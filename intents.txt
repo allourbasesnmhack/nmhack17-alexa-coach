@@ -5,6 +5,9 @@
    },
    {
      “intent”: “YesGoalsIntent”
+   },
+   {
+    "intent": "YesTipIntent"
    }
  ]
 }

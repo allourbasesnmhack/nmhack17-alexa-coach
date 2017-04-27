@@ -48,10 +48,13 @@ def no_intent():
     no_message = render_template('good_bye')
     return statement(no_message)
 
-@ask.intent("YesTipIntent")
+
+@ask.intent("YesGoalsIntent")
 def yes_intent():
-    tips_message = tips.generateTipsMessage(userinfo_item['userid'])
-    return question(tips_message)
+    print userinfo_item['userid']
+    # tips_message = tips.generateTipsMessage(userinfo_item['userid'])
+    tips_message = render_template('tips')
+    return statement(tips_message)
 
 if __name__ == '__main__':
     app.run(debug=True)
