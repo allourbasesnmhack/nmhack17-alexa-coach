@@ -18,6 +18,9 @@ goal_item_over: You have met your {{goalname}} goal of {{target}} for today with
 
 <<<<<<< HEAD
 activity_list: '{{ regarding }} is a type {{ segment }} client and has a {{ type }} for {{ subject }}'
+
+opportunity_list: '{{ subject }} for {{ type }} for {{ regarding }}'
+
 =======
 question_tips: would you like any tips on meeting your goals?
 
