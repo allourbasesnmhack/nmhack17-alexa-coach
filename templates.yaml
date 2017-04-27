@@ -17,15 +17,10 @@ goal_item_under: You have {{actual}} {{goalname}} activities scheduled for today
 goal_item_over: You have met your {{goalname}} goal of {{target}} for today with {{actual}} activities...
 
 activity_list: '{{ regarding }} is a type {{ segment }} client and has a {{ type }} for {{ subject }}'
-<<<<<<< HEAD
 
 opportunity_list: '{{ subject }} for {{ type }} for {{ regarding }}'
 
-=======
-question_tips: would you like any tips on meeting your goals?
-=======
 question_tip: would you like any tips on meeting your goals?
->>>>>>> 3dc6350e5646ace2781c47ba5ea8965e65673a4b
 
 question_activites: would you like to list your top five activites?
 
