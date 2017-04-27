@@ -1,7 +1,9 @@
-welcome: Welcome to memory game Ted. I'm going to say three numbers for you to repeat backwards. Ready?
+welcome: Here is your daily summary of activity. {{ first_name }}{{ last_name }}, you have a total of {{ openact }} open activities for today.  You have {{ factfind }} fact finding.  You have {{suspects}} qualified suspect.  You have {{meals}} meals. Would you like to hear your goals tracking?
 
-round: Can you repeat the numbers {{ numbers|join(", ") }} backwards?
+goals_good: Great job! You have 5 planned goals and you have {{ openact }}
 
-win: Good job!
+goals_bad: Your a little under your goals, you have 5 planned goals and you have {{ openact }}
 
-lose: Sorry, that's the wrong answer.
+good_bye: See you tomorrow.  Have a good day!
+
+tester: Its Alive
