@@ -35,6 +35,7 @@ def start_skill():
     #welcome_message = render_template('welcome', first_name=item['first_name'], last_name=item['last_name'], openact=item['openact'], factfind=item['factfind'], suspects=item['suspects'], meals=item['meals'])
     welcome_message = render_template('welcome', first_name=userinfo_item['first_name'], last_name=userinfo_item['last_name'], openact=count)
     welcome_message += goals.generateGoalsMessage(userinfo_item['userid'])
+    welcome_message += render_template('tips_question')
     return question(welcome_message)
 
 @ask.intent("YesGoalsIntent")
