@@ -1,1 +1,1 @@
-# nmhack17-vcoach-alexa
+# nmhack17-alexa-coach
