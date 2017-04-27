@@ -1,6 +1,7 @@
 import logging
 import boto3
 import goals
+import activities
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
@@ -28,7 +29,6 @@ count = 0
 for activity_item in activities_items:
     count = count + int(activity_item['count'])
 
-
 @ask.launch
 def start_skill():
     #welcome_message = render_template('welcome', first_name=item['first_name'], last_name=item['last_name'], openact=item['openact'], factfind=item['factfind'], suspects=item['suspects'], meals=item['meals'])
@@ -44,8 +44,9 @@ def yes_intent():
 
 @ask.intent("NoGoalsIntent")
 def no_intent():
-    no_message = render_template('good_bye')
+    no_message = activities.generateActivitiesMessage(userinfo_item['userid'])
     return statement(no_message)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
