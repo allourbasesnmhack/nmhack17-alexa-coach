@@ -1,8 +1,11 @@
+#!/usr/bin/env python
 import logging
 import boto3
+import goals
 #from random import randint
 from flask import Flask, render_template
 from flask_ask import Ask, statement, question, session
+from boto3.dynamodb.conditions import Key, Attr
 
 app = Flask(__name__)
 ask = Ask(app, "/")
@@ -28,17 +31,15 @@ def start_skill():
 
 @ask.intent("YesGoalsIntent")
 def yes_intent():
-    if item['openact'] > 10:
-        goals_message = render_template('goals_good', first_name=item['first_name'], openact=item['openact'])
-    else:
-        goals_message = render_template('goals_bad', first_name=item['first_name'], openact=item['openact'])
-    # goals_message = render_template('tester')
+    goals_message = goals.generateGoalsMessage(userinfo_item['userid'])
     return question(goals_message)
 
 @ask.intent("NoGoalsIntent")
 def no_intent():
     no_message = render_template('good_bye')
     return statement(no_message)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
