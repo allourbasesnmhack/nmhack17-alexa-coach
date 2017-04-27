@@ -14,7 +14,7 @@ def generateGoalsMessage(userid):
         diff= int(item['target'])-int(item['actual'])
         if(diff <= 0):
             diff=diff*-1
-            goal_message+= render_template('goal_item_over', goalname=item['description'],actual=item['actual'],target=item['target'],difference=diff)
+            goal_message_good+= render_template('goal_item_over', goalname=item['description'],actual=item['actual'],target=item['target'],difference=diff)
         else:
-            goal_message+= render_template('goal_item_under', goalname=item['description'],actual=item['actual'],target=item['target'],difference=diff)
-    return goal_message
+            goal_message_bad+= render_template('goal_item_under', goalname=item['description'],actual=item['actual'],target=item['target'],difference=diff)
+    return goal_message_good+goal_message_bad
