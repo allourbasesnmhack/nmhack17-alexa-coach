@@ -9,18 +9,21 @@ ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-table = dynamodb.Table('users')
-response = table.get_item(
+userinfo_table = dynamodb.Table('userinfo')
+response = userinfo_table.get_item(
     Key={
-        'username': 'normweston',
-        'last_name': 'Weston'
+        'userid': '1',
     }
 )
-item = response['Item']
+userinfo_item = response['Item']
+
+
+
 
 @ask.launch
 def start_skill():
-    welcome_message = render_template('welcome', first_name=item['first_name'], last_name=item['last_name'], openact=item['openact'], factfind=item['factfind'], suspects=item['suspects'], meals=item['meals'])
+    #welcome_message = render_template('welcome', first_name=item['first_name'], last_name=item['last_name'], openact=item['openact'], factfind=item['factfind'], suspects=item['suspects'], meals=item['meals'])
+    welcome_message = render_template('welcome', first_name=userinfo_item['first_name'], last_name=userinfo_item['last_name'])#, openact=count)
     return question(welcome_message)
 
 @ask.intent("YesGoalsIntent")
