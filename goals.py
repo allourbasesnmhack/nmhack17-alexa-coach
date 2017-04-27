@@ -8,7 +8,8 @@ def generateGoalsMessage(userid):
     response = table.scan(FilterExpression=boto3.dynamodb.conditions.Attr("userid").eq(userid))
 
     items = response['Items']
-    goal_message= ""
+    goal_message_bad=""
+    goal_message_good=""
     for item in items:
         print item['goalname']
         diff= int(item['target'])-int(item['actual'])
