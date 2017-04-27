@@ -1,4 +1,4 @@
-welcome: Here is your daily summary of activity. {{ first_name }} {{ last_name }} you have a total of {{ openact }} #open activities for today.  You have {{ factfind }} fact finding.  You have {{suspects}} qualified suspect.  You have {{meals}} meals. Would you like to hear your goals tracking?
+welcome: Welcome, {{ first_name }} {{ last_name }}...You have {{ openact }} open activities for today. 
 
 goals_good: Great job! You have 5 planned goals and you have {{ openact }}
 
@@ -9,4 +9,5 @@ good_bye: See you tomorrow.  Have a good day!
 tester: Its Alive
 
 goal_item_under: You have {{actual}} {{goalname}} activities scheduled for today, that is {{difference}} under your goal of {{target}}...
+
 goal_item_over: You have met your {{goalname}} goal of {{target}} for today with {{actual}} activities...
