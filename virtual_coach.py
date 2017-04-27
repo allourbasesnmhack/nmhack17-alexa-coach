@@ -1,7 +1,7 @@
 import logging
 import boto3
 import goals
-import tips
+import activites
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
@@ -53,9 +53,9 @@ def yes_intent():
         message=render_template("question_tip")
     }
     elif(intent == 2){ #acitivite
-
+        message+=activities.generateActivitiesMessage(userinfo_item['userid'])
         session.attributtes['intent']=3
-        message=render_template("question_activites")
+        message+=render_template("question_activites")
     }
     elif(intent == 3 ){ #opertunities
 
@@ -98,14 +98,6 @@ def no_intent():
 @ask.session_ended
 def session_ended():
     return "{}", 200
-
-
-@ask.intent("YesGoalsIntent")
-def yes_intent():
-    print userinfo_item['userid']
-    # tips_message = tips.generateTipsMessage(userinfo_item['userid'])
-    tips_message = render_template('tips')
-    return statement(tips_message)
 
 if __name__ == '__main__':
     app.run(debug=True)
