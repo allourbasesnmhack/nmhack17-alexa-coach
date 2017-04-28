@@ -7,20 +7,20 @@ good_bye: See you tomorrow.  Have a good day!
 
 tester: Its Alive
 
-goal_item_under: You have {{actual}} {{goalname}} activities completed for the month, that is {{difference}} under your goal of {{target}}<break time="1500ms" />
+goal_item_under: You have {{actual}} {{goalname}} activities completed for the month, that is {{difference}} under your goal of {{target}}<break time="1200ms" />
 
-goal_item_over: You have met your {{goalname}} goal of {{target}} for the month with {{actual}} activities<break time="1500ms" />
+goal_item_over: You have met your {{goalname}} goal of {{target}} for the month with {{actual}} activities<break time="1200ms" />
 
-goal_item_under_daily: You have completed {{actual}} {{goalname}} activities, that is {{difference}} under your goal of {{target}}<break time="1500ms" />
+goal_item_under_daily: You have completed {{actual}} {{goalname}} activities, that is {{difference}} under your goal of {{target}}<break time="1200ms" />
 
-goal_item_over_daily: You have met your {{goalname}} goal of {{target}} for today with {{actual}} activities<break time="1500ms" />
+goal_item_over_daily: You have met your {{goalname}} goal of {{target}} for today with {{actual}} activities<break time="1200ms" />
 
 activity_list: '{{ regarding }} is a type {{ segment }} client and has a {{ type }} for {{ subject }}... ...'
 
 opportunity_list: '{{ subject }} for {{ type }} for {{ regarding }}... ...'
 
-question_tip: would you like any tips on meeting your goals?... ...
+question_tip: Would you like any tips on meeting your goals?... ...
 
-question_activites: would you like to list your top five activities?... ...
+question_activites: <break time="1200ms" /> Would you like to list your top five activities?... ...
 
-question_oppertunites: would you like to list your top 3 opportunities?... ...
+question_oppertunites: <break time="1200ms" /> Would you like to list your top 3 opportunities?... ...
