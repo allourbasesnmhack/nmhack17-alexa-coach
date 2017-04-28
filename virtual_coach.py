@@ -1,9 +1,6 @@
 import logging
 import boto3
-import goals
-import tips
-import user
-import activities
+import goals, tips, user, activities
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
@@ -48,7 +45,7 @@ def yes_intent():
     elif(intent == 3 ): #opertunities
 
         session.attributes['intent']=4
-        #message=render_template("question_oppertunites")
+        message += render_template('good_bye')
 
     else:
         message = render_template('good_bye')
@@ -73,19 +70,13 @@ def no_intent():
     elif(intent == 3 ): #opertunities
 
         session.attributes['intent']=4
-        #message=render_template("question_oppertunites")
+        message = render_template('good_bye')
 
     else:
         message = render_template('good_bye')
 
     return question(message)
 
-# @ask.intent("YesIntent")
-# def yes_intent():
-#     print userinfo_item['userid']
-#     # tips_message = tips.generateTipsMessage(userinfo_item['userid'])
-#     tips_message = render_template('tips')
-#     return statement(tips_message)
 
 @ask.intent('AMAZON.CancelIntent')
 @ask.intent('AMAZON.StopIntent')
