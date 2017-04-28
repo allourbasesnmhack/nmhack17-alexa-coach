@@ -48,11 +48,10 @@ def start_skill():
 def yes_intent():
     intent = session.attributes['intent']
     if( intent == 1): #tips
-        # message = tips.generateTipsMessage(userinfo_item['userid'])
-        message = tips.generateTipsMessage("Hello")
+        message = tips.generateTipMessage("factfinder")
+        # statement(message)
 
         session.attributes['intent']=2
-        message+=render_template("question_tip")
 
     elif(intent == 2): #acitivite
         message+=activities.generateActivitiesMessage(userinfo_item['userid'])
