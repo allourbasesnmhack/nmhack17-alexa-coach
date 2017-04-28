@@ -19,8 +19,7 @@ count = activities.countActivites(userinfo_item['userid'])
 def start_skill():
     #welcome_message = render_template('welcome', first_name=item['first_name'], last_name=item['last_name'], openact=item['openact'], factfind=item['factfind'], suspects=item['suspects'], meals=item['meals'])
     welcome_message = render_template('welcome', first_name=userinfo_item['first_name'], last_name=userinfo_item['last_name'], openact=count)
-    welcome_message += goals.generateGoalsMessage(userinfo_item['userid'])
-    welcome_message += render_template('tips_question')
+    welcome_message += "Do you want more details?..."
 
     session.attributes['intent']=1
 
@@ -30,22 +29,26 @@ def start_skill():
 def yes_intent():
     intent = session.attributes['intent']
     message=''
-    if( intent == 1): #tips
+    if(intent == 1):
+        message = goals.generateGoalsMessage(userinfo_item['userid'])
+        message += render_template('tips_question')
+        session.attributes['intent']=2
+    elif( intent == 2): #tips
         # message = tips.generateTipsMessage(userinfo_item['userid'])
         message = tips.generateTipsMessage("Hello")
 
-        session.attributes['intent']=2
+        session.attributes['intent']=3
         message+=render_template("question_activites")
 
-    elif(intent == 2): #acitivite
-        message+=activities.generateActivitiesMessage(userinfo_item['userid'])
-        session.attributes['intent']=3
+    elif(intent == 3): #acitivite
+        message=activities.generateActivitiesMessage(userinfo_item['userid'])
+        session.attributes['intent']=4
         message+=render_template("question_oppertunites")
 
-    elif(intent == 3 ): #opertunities
+    elif(intent == 4 ): #opertunities
 
-        session.attributes['intent']=4
-        message += render_template('good_bye')
+        session.attributes['intent']=5
+        message = render_template('good_bye')
         return stop_intent(message)
     else:
         return stop_intent(render_template('good_bye'))
@@ -57,19 +60,22 @@ def yes_intent():
 def no_intent():
     intent = session.attributes['intent']
     message=''
-    if( intent == 1): #tips
-
+    if(intent==1):
+        message += render_template('tips_question')
         session.attributes['intent']=2
-        message=render_template("question_activites")
-
-    elif(intent == 2): #acitivite
+    elif( intent == 2): #tips
 
         session.attributes['intent']=3
-        message=render_template("question_oppertunites")
+        message=render_template("question_activites")
 
-    elif(intent == 3 ): #opertunities
+    elif(intent == 3): #acitivite
 
         session.attributes['intent']=4
+        message=render_template("question_oppertunites")
+
+    elif(intent == 4 ): #opertunities
+
+        session.attributes['intent']=5
         return stop_intent(render_template('good_bye'))
 
     else:
