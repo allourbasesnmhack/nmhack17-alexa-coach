@@ -35,7 +35,7 @@ def yes_intent():
         session.attributes['intent']=2
     elif( intent == 2): #tips
         # message = tips.generateTipsMessage(userinfo_item['userid'])
-        message = tips.generateTipsMessage("Hello")
+        message = tips.generateTipMessage("Hello")
 
         session.attributes['intent']=3
         message+=render_template("question_activites")
