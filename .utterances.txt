@@ -1,6 +1,3 @@
-NoGoalsIntent no
-YesGoalsIntent yes
-
 NoIntent no
 NoIntent nah
 YesIntent yes

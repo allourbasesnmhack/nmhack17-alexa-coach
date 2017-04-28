@@ -1,8 +1,6 @@
 import logging
 import boto3
-import goals
-import tips
-import activities
+from modules import goals, tips, user, activities, opportunities, ssml
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
@@ -12,98 +10,91 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-userinfo_table = dynamodb.Table('userinfo')
-response = userinfo_table.get_item(
-    Key={
-        'userid': '1',
-    }
-)
-userinfo_item = response['Item']
 
+userinfo_item = user.getUser('1');
+count = activities.countActivites(userinfo_item['userid'])
 
-activities_table = dynamodb.Table('activities')
-response = activities_table.scan(FilterExpression=boto3.dynamodb.conditions.Attr('userid').eq('1'))
-activities_items = response['Items']
-# print activities_items
-count = 0
-for activity_item in activities_items:
-    count = count + int(activity_item['count'])
-
-# @ask.on_session_started
-# def new_session():
 
 @ask.launch
 def start_skill():
     #welcome_message = render_template('welcome', first_name=item['first_name'], last_name=item['last_name'], openact=item['openact'], factfind=item['factfind'], suspects=item['suspects'], meals=item['meals'])
     welcome_message = render_template('welcome', first_name=userinfo_item['first_name'], last_name=userinfo_item['last_name'], openact=count)
-    welcome_message += goals.generateGoalsMessage(userinfo_item['userid'])
-    welcome_message += render_template('tips_question')
+    welcome_message += "Do you want more details?..."
 
     session.attributes['intent']=1
 
-    return question(welcome_message)
+    return question(ssml.prepare(welcome_message))
 
 @ask.intent("YesIntent")
 def yes_intent():
     intent = session.attributes['intent']
-    if( intent == 1): #tips
-        message = tips.generateTipMessage("factfinder")
-        # statement(message)
-
+    message=''
+    if(intent == 1):
+        message = goals.generateGoalsMessage(userinfo_item['userid'])
+        message += render_template('tips_question')
         session.attributes['intent']=2
+    elif( intent == 2): #tips
+        # message = tips.generateTipsMessage(userinfo_item['userid'])
+        message = tips.generateTipsMessage("Hello")
 
-    elif(intent == 2): #acitivite
-        message+=activities.generateActivitiesMessage(userinfo_item['userid'])
         session.attributes['intent']=3
         message+=render_template("question_activites")
 
-    elif(intent == 3 ): #opertunities
-
+    elif(intent == 3): #acitivite
+        message=activities.generateActivitiesMessage(userinfo_item['userid'])
         session.attributes['intent']=4
-        message=render_template("question_oppertunites")
+        message+=render_template("question_oppertunites")
 
-    else:
+    elif(intent == 4 ): #opertunities
+        message=opportunities.generateOpportunitiesMessage(userinfo_item['userid'])
+        session.attributes['intent']=5
         message = render_template('good_bye')
+        return stop_intent(message)
+    else:
+        return stop_intent(render_template('good_bye'))
 
 
-    return question(message)
+    return question(ssml.prepare(message))
 
 @ask.intent("NoIntent")
 def no_intent():
     intent = session.attributes['intent']
-    if( intent == 1): #tips
-
+    message=''
+    if(intent==1):
+        message += render_template('tips_question')
         session.attributes['intent']=2
-        message=render_template("question_tip")
-
-    elif(intent == 2): #acitivite
+    elif( intent == 2): #tips
 
         session.attributes['intent']=3
         message=render_template("question_activites")
 
-    elif(intent == 3 ): #opertunities
+    elif(intent == 3): #acitivite
 
         session.attributes['intent']=4
         message=render_template("question_oppertunites")
 
+    elif(intent == 4 ): #opertunities
+
+        session.attributes['intent']=5
+        return stop_intent(render_template('good_bye'))
+
     else:
-        message = render_template('good_bye')
+        return stop_intent(render_template('good_bye'))
 
-    return question(message)
+    return question(ssml.prepare(message))
 
-# @ask.intent("YesIntent")
-# def yes_intent():
-#     print userinfo_item['userid']
-#     # tips_message = tips.generateTipsMessage(userinfo_item['userid'])
-#     tips_message = render_template('tips')
-#     return statement(tips_message)
 
 @ask.intent('AMAZON.CancelIntent')
 @ask.intent('AMAZON.StopIntent')
+def stop_intent(message):
+    if not message:
+        message=render_template('good_bye')
+    return statement(ssml.prepare(message))
+
 @ask.session_ended
 def session_ended():
     return "{}", 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,13 +1,10 @@
 {
  “intents”: [
    {
-     “intent”: “NoGoalsIntent”
+     “intent”: “NoIntent”
    },
    {
-     “intent”: “YesGoalsIntent”
-   },
-   {
-    "intent": "YesTipIntent"
+     “intent”: “YesIntent”
    }
  ]
 }
