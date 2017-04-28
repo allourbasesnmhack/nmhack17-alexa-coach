@@ -32,6 +32,7 @@ def start_skill():
 @ask.intent("YesIntent")
 def yes_intent():
     intent = session.attributes['intent']
+    message=''
     if( intent == 1): #tips
         # message = tips.generateTipsMessage(userinfo_item['userid'])
         message = tips.generateTipsMessage("Hello")
@@ -58,6 +59,7 @@ def yes_intent():
 @ask.intent("NoIntent")
 def no_intent():
     intent = session.attributes['intent']
+    message=''
     if( intent == 1): #tips
 
         session.attributes['intent']=2
