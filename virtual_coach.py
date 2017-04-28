@@ -1,6 +1,6 @@
 import logging
 import boto3
-from modules import goals, tips, user, activities
+from modules import goals, tips, user, activities, opportunities, ssml
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
@@ -23,7 +23,7 @@ def start_skill():
 
     session.attributes['intent']=1
 
-    return question(welcome_message)
+    return question(ssml.prepare(welcome_message))
 
 @ask.intent("YesIntent")
 def yes_intent():
@@ -46,7 +46,7 @@ def yes_intent():
         message+=render_template("question_oppertunites")
 
     elif(intent == 4 ): #opertunities
-
+        message=opportunities.generateOpportunitiesMessage(userinfo_item['userid'])
         session.attributes['intent']=5
         message = render_template('good_bye')
         return stop_intent(message)
@@ -54,7 +54,7 @@ def yes_intent():
         return stop_intent(render_template('good_bye'))
 
 
-    return question(message)
+    return question(ssml.prepare(message))
 
 @ask.intent("NoIntent")
 def no_intent():
@@ -81,7 +81,7 @@ def no_intent():
     else:
         return stop_intent(render_template('good_bye'))
 
-    return question(message)
+    return question(ssml.prepare(message))
 
 
 @ask.intent('AMAZON.CancelIntent')
@@ -89,11 +89,12 @@ def no_intent():
 def stop_intent(message):
     if not message:
         message=render_template('good_bye')
-    return statement(message)
+    return statement(ssml.prepare(message))
 
 @ask.session_ended
 def session_ended():
     return "{}", 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)
