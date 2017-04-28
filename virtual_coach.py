@@ -2,6 +2,7 @@ import logging
 import boto3
 import goals
 import tips
+import user
 import activities
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
@@ -12,15 +13,8 @@ app = Flask(__name__)
 ask = Ask(app, "/")
 logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
-userinfo_table = dynamodb.Table('userinfo')
-response = userinfo_table.get_item(
-    Key={
-        'userid': '1',
-    }
-)
-userinfo_item = response['Item']
 
+userinfo_item = user.getUser('1');
 count = activities.countActivites(userinfo_item['userid'])
 
 
