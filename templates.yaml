@@ -3,11 +3,6 @@ welcome: Welcome, {{ first_name }} {{ last_name }}...You have {{ openact }} open
 
 tips_question: ...Would you like any tips on meeting your goals?
 
-
-goals_good: Great job! You have 5 planned goals and you have {{ openact }}
-
-goals_bad: Your a little under your goals, you have 5 planned goals and you have {{ openact }}
-
 good_bye: See you tomorrow.  Have a good day!
 
 tester: Its Alive
@@ -24,4 +19,4 @@ question_tip: would you like any tips on meeting your goals?
 
 question_activites: would you like to list your top five activites?
 
-question_oppertunites: would you like to list your top 5 oppertunites?
+question_oppertunites: would you like to list your top 3 oppertunites?
