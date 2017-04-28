@@ -10,7 +10,7 @@ def generateTipMessage( goal_name ):
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     table = dynamodb.Table('tips')
 
-    response = table.scan(
+    response = table.scan (
         FilterExpression=Attr("goal_name").eq('factfinder')
     )
 
