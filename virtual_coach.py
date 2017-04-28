@@ -81,7 +81,10 @@ def no_intent():
 @ask.intent('AMAZON.CancelIntent')
 @ask.intent('AMAZON.StopIntent')
 def stop_intent(message):
+    if not message:
+        message=render_template('good_bye')
     return statement(message)
+
 @ask.session_ended
 def session_ended():
     return "{}", 200

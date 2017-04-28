@@ -1,13 +1,16 @@
 {
- “intents”: [
-   {
-     “intent”: “NoGoalsIntent”
-   },
-   {
-     “intent”: “YesGoalsIntent”
-   },
-   {
-    "intent": "YesTipIntent"
-   }
- ]
+  "intents": [
+    {
+      "intent": "NoIntent"
+    },
+    {
+      "intent": "YesIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
 }
