@@ -49,8 +49,8 @@ def yes_intent():
 
     elif(intent == 4 ): #opportunities
         message=opportunities.generateOpportunitiesMessage(userinfo_item['userid'])
-        #session.attributes['intent']=5
-
+        session.attributes['intent']=5
+        message+=render_template('good_bye')
         return stop_intent(message)
     else:
         return stop_intent(render_template('good_bye'))
@@ -77,7 +77,7 @@ def no_intent():
 
     elif(intent == 4 ): #opertunities
 
-        #session.attributes['intent']=5
+        session.attributes['intent']=5
         return stop_intent(render_template('good_bye'))
 
     else:
