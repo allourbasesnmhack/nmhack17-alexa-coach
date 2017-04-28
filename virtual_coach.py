@@ -21,17 +21,8 @@ response = userinfo_table.get_item(
 )
 userinfo_item = response['Item']
 
+count = activities.countActivites(userinfo_item['userid'])
 
-activities_table = dynamodb.Table('activities')
-response = activities_table.scan(FilterExpression=boto3.dynamodb.conditions.Attr('userid').eq('1'))
-activities_items = response['Items']
-# print activities_items
-count = 0
-for activity_item in activities_items:
-    count = count + int(activity_item['count'])
-
-# @ask.on_session_started
-# def new_session():
 
 @ask.launch
 def start_skill():
