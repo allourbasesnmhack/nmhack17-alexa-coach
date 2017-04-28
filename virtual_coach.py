@@ -1,6 +1,6 @@
 import logging
 import boto3
-import goals, tips, user, activities
+from modules import goals, tips, user, activities
 from boto3.dynamodb.conditions import Key, Attr
 #from random import randint
 from flask import Flask, render_template
