@@ -33,6 +33,8 @@ def yes_intent():
         message = goals.generateGoalsMessage(userinfo_item['userid'])
         message += render_template('tips_question')
         session.attributes['intent']=2
+        card=goals.generateGoalCard(userinfo_item['userid'])
+        return question(ssml.prepare(message)).simple_card(title='Goals', content=message)
     elif( intent == 2): #tips
         # message = tips.generateTipsMessage(userinfo_item['userid'])
         message = tips.generateTipsMessage("Hello")
