@@ -64,6 +64,7 @@ def no_intent():
     message=''
     if(intent==1):
         #message += render_template('tips_question')
+        message=render_template("question_activities")
         session.attributes['intent']=3
     elif( intent == 2): #tips
 
@@ -73,7 +74,7 @@ def no_intent():
     elif(intent == 3): #acitivite
 
         session.attributes['intent']=4
-        message=render_template("question_oppertunites")
+        message=render_template("question_opportunities")
 
     elif(intent == 4 ): #opertunities
 
