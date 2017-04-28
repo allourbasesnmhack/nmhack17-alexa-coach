@@ -46,9 +46,9 @@ def yes_intent():
 
         session.attributes['intent']=4
         message += render_template('good_bye')
-
+        return stop_intent(message)
     else:
-        message = render_template('good_bye')
+        return stop_intent(render_template('good_bye'))
 
 
     return question(message)
@@ -70,16 +70,18 @@ def no_intent():
     elif(intent == 3 ): #opertunities
 
         session.attributes['intent']=4
-        message = render_template('good_bye')
+        return stop_intent(render_template('good_bye'))
 
     else:
-        message = render_template('good_bye')
+        return stop_intent(render_template('good_bye'))
 
     return question(message)
 
 
 @ask.intent('AMAZON.CancelIntent')
 @ask.intent('AMAZON.StopIntent')
+def stop_intent(message):
+    return statement(message)
 @ask.session_ended
 def session_ended():
     return "{}", 200
