@@ -13,8 +13,7 @@ def generateGoalsMessage(userid):
 
     for item in items:
         print item['goalname']
-        goal_message_good = ""
-        goal_message_bad = ""
+
         diff= int(item['target'])-int(item['actual'])
         if(diff <= 0):
             diff=diff*-1
