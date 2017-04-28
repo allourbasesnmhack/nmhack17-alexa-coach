@@ -50,7 +50,7 @@ def yes_intent():
     elif(intent == 4 ): #opertunities
         message=opportunities.generateOpportunitiesMessage(userinfo_item['userid'])
         session.attributes['intent']=5
-        message = render_template('good_bye')
+        message = render_template('question_opportunities')
         return stop_intent(message)
     else:
         return stop_intent(render_template('good_bye'))
