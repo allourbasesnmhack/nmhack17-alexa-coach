@@ -52,17 +52,17 @@ def yes_intent():
         message = tips.generateTipsMessage("Hello")
 
         session.attributes['intent']=2
-        message+=render_template("question_tip")
+        message+=render_template("question_activites")
 
     elif(intent == 2): #acitivite
         message+=activities.generateActivitiesMessage(userinfo_item['userid'])
         session.attributes['intent']=3
-        message+=render_template("question_activites")
+        message+=render_template("question_oppertunites")
 
     elif(intent == 3 ): #opertunities
 
         session.attributes['intent']=4
-        message=render_template("question_oppertunites")
+        #message=render_template("question_oppertunites")
 
     else:
         message = render_template('good_bye')
@@ -76,17 +76,17 @@ def no_intent():
     if( intent == 1): #tips
 
         session.attributes['intent']=2
-        message=render_template("question_tip")
+        message=render_template("question_activites")
 
     elif(intent == 2): #acitivite
 
         session.attributes['intent']=3
-        message=render_template("question_activites")
+        message=render_template("question_oppertunites")
 
     elif(intent == 3 ): #opertunities
 
         session.attributes['intent']=4
-        message=render_template("question_oppertunites")
+        #message=render_template("question_oppertunites")
 
     else:
         message = render_template('good_bye')
