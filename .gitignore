@@ -1,4 +1,4 @@
 *.retry
 *.pyc
-venv/*
 v2/*
+venv/*
