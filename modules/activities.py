@@ -17,7 +17,7 @@ def generateActivitiesMessage(userid):
             break
     return activity_list_message
 
-def countActivites(userid):
+def countactivities(userid):
     activities_table = dynamodb.Table('goals')
     response = activities_table.scan(FilterExpression=boto3.dynamodb.conditions.Attr('userid').eq(userid))
     activities_items = response['Items']

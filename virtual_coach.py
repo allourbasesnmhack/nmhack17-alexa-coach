@@ -12,7 +12,7 @@ logging.getLogger("flask_ask").setLevel(logging.DEBUG)
 
 
 userinfo_item = user.getUser('1');
-count = activities.countActivites(userinfo_item['userid'])
+count = activities.countactivities(userinfo_item['userid'])
 
 
 @ask.launch
@@ -36,11 +36,11 @@ def yes_intent():
         card=goals.generateGoalCard(userinfo_item['userid'])
         return question(ssml.prepare(message)).simple_card(title='Goals', content=message)
     elif( intent == 2): #tips
-        # message = tips.generateTipsMessage(userinfo_item['userid'])
-        message = tips.generateTipsMessage("Hello")
+        message = tips.generateTipsMessage(userinfo_item['userid'])
+        #message = tips.generateTipsMessage("Hello")
 
         session.attributes['intent']=3
-        message+=render_template("question_activites")
+        message+=render_template("question_activities")
 
     elif(intent == 3): #activities
         message=activities.generateActivitiesMessage(userinfo_item['userid'])
@@ -68,7 +68,7 @@ def no_intent():
     elif( intent == 2): #tips
 
         session.attributes['intent']=3
-        message=render_template("question_activites")
+        message=render_template("question_activities")
 
     elif(intent == 3): #acitivite
 

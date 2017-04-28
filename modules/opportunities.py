@@ -11,8 +11,11 @@ def generateOpportunitiesMessage(userid):
 
     items = response['Items']
     opportunity_list_message = ""
-
+    count=0
 #opportunity_list: '{{ subject }} for {{ type }} for {{ regarding }}'
     for item in items:
+        count=count+1
         opportunity_list_message += render_template('opportunity_list', subject=item['subject'], type=item['type'], regarding=item['regarding'])
+        if count >2:
+            break
     return opportunity_list_message
