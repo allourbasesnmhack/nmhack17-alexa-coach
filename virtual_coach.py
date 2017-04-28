@@ -42,12 +42,12 @@ def yes_intent():
         session.attributes['intent']=3
         message+=render_template("question_activites")
 
-    elif(intent == 3): #acitivite
+    elif(intent == 3): #activities
         message=activities.generateActivitiesMessage(userinfo_item['userid'])
         session.attributes['intent']=4
-        message+=render_template("question_oppertunites")
+        message+=render_template("question_activities")
 
-    elif(intent == 4 ): #opertunities
+    elif(intent == 4 ): #opportunities
         message=opportunities.generateOpportunitiesMessage(userinfo_item['userid'])
         session.attributes['intent']=5
         message = render_template('question_opportunities')
