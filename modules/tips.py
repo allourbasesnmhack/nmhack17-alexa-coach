@@ -5,7 +5,7 @@ from boto3.dynamodb.conditions import Key, Attr
 
 my_pick = ""
 
-def generateTipMessage( goal_name ):
+def generateTipsMessage( userid ):
     # tips_message = "Here's a tip Derek... Just the tip!"
     dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
     table = dynamodb.Table('tips')
